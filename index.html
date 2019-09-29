@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <title>LAB</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/app.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row tableau">
+            <div class="col">
+                <p>Gestionnaire de Taches</p>
+            </div>
+            <div class="col">
+
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalBilan">
+                    bilan</button>
+
+                <div class="modal fade" id="ModalBilan" tabindex="-1" role="dialog" aria-labelledby="ModalBilanLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+
+                            <div class="modal-body">
+                                ici le code du bilan
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="tittle de la tache">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="button" id="btnAjouter" data-toggle="modal"
+                                data-target="#ModalAjouterTache">
+                                Ajouter</button>
+
+                            <div class="modal fade" id="ModalAjouterTache" tabindex="-1" role="dialog"
+                                aria-labelledby="ModalAjouterTacheLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">Réinitialiser</button>
+                                            <button type="button" class="btn btn-primary">Sauvegarder</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+</body>
+
+
+
+</html>
