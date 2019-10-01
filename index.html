@@ -1,37 +1,89 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <title>LAB</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-
-    <script src="js/app.js"></script>
+    <title>To-Do List</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script type="text/javascript" src="js/app.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </head>
 
 <body>
     <div class="container">
         <div class="row tableau">
             <div class="col">
-                <p>Gestionnaire de Taches</p>
+                <p>Gestionnaire de tâches</p>
             </div>
-            <div class="col">
+            <div class="col btnBilan">
 
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#ModalBilan">
                     bilan</button>
 
+                    
                 <div class="modal fade" id="ModalBilan" tabindex="-1" role="dialog" aria-labelledby="ModalBilanLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
 
                             <div class="modal-body">
-                                ici le code du bilan
+                                <!--////////// Ajout /////////-->
+                                    <table class="table table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Information</th>
+                                                <th scope="col">Quantité</th>
+                                                <th scope="col">Pourcentage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Tâches en cours</th>
+                                                <td id="tachesCoursQuant">0</td>
+                                                <td id="tachesCoursPourcent">%</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tâches en achevées</th>
+                                                <td id="tachesAchevesQuant">0</td>
+                                                <td id="tachesAchevesPourcent">%</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Total</th>
+                                                <td id="TotalTaches">0</td>
+                                                <td>100%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="table table-striped">
+                                        <thead class="thead-dark">
+                                            <tr>
+                                                <th scope="col">Information</th>
+                                                <th scope="col">Quantité</th>
+                                                <th scope="col">Pourcentage</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <th scope="row">Tâches en retard</th>
+                                                <td id="tachesRetardQuant">0</td>
+                                                <td id="tachesRetardPourcent">%</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tâches en achevées en retard</th>
+                                                <td id="tachesAchevesRetardQuant">0</td>
+                                                <td id="tachesAchevesRetardPourcent">%</td>
+                                            </tr>
+                                            <tr>
+                                                <th scope="row">Tâches achevées à temps</th>
+                                                <td id="tachesAchevesTempsQuant">0</td>
+                                                <td id="tachesAchevesTempsPourcent"> %</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                             </div>
-
+                            <!--////////// Ajout /////////-->
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
                             </div>
@@ -42,48 +94,40 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="tittle de la tache">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Titre de la tâche">
                         <div class="input-group-append">
+
                             <button class="btn btn-outline-secondary" type="button" id="btnAjouter" data-toggle="modal"
-                                data-target="#ModalAjouterTache">
-                                Ajouter</button>
+                                data-target="#modalCreer">Créer</button>
 
-                            <div class="modal fade" id="ModalAjouterTache" tabindex="-1" role="dialog"
-                                aria-labelledby="ModalAjouterTacheLabel" aria-hidden="true">
-                                <div class="modal-dialog" role="document">
+                            <div id="modalCreer" class="modal fade" role="dialog">
+                                <div class="modal-dialog">
+
+                                    <!-- Modal content-->
                                     <div class="modal-content">
-
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                            <h4 class="modal-title">Modal Header</h4>
+                                        </div>
                                         <div class="modal-body">
-                                            ...
+                                            <p>Some text in the modal.</p>
                                         </div>
-
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                data-dismiss="modal">Réinitialiser</button>
-                                            <button type="button" class="btn btn-primary">Sauvegarder</button>
+                                            <button type="button" class="btn btn-default"
+                                                data-dismiss="modal">Close</button>
                                         </div>
-
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
-
-
-
             </div>
-
         </div>
 
-    </div>
-
-
-
 </body>
-
-
 
 </html>
