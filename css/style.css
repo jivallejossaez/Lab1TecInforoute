@@ -3,5 +3,37 @@
     margin-bottom: auto;
 }
 .tableau{
+    height: 100;
     background-color: gray;
+    
+}
+.top{
+    padding-top: 50;
+}
+.abs-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+ .titleApp{
+    align-items: center;
+    justify-items: center;
+    color: #FFF;
+    text-align: left;
+    font-size: large;
+ }
+.form {
+  width: 450px;
+
+}
+
+#templateTache{
+    padding: 1%; 
+    border: 1px solid;
+    margin: 1%;
+}
+#prioriteTache{
+    border: 1px solid;
+    text-align: center;
 }
