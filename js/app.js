@@ -13,11 +13,13 @@ class tache {
             this.minutes = minutes,
             this.secondes = secondes
     }
+    getStatus() { return this.retard }
     nom() { return this.nom; }
     priorite() { return this.priorite }
     heure() { return this.heure }
     minutes() { return this.minutes }
     secondes() { return this.secondes }
+    tacheEnRetard() { this.retard = true }
     setHeure(h) { this.heure = h }
     setMinutes(m) { this.minutes = m }
     setSecondes(s) { this.secondes = s }
@@ -127,7 +129,12 @@ function chrono(x) {
                 min = 59;
                 allTaches[x].setMinutes(59);
                 if (heure == 0) {
-                    tacheEnRetard()
+                    secondes = 0;
+                    allTaches[x].setSecondes(secondes);
+                    min = 0;
+                    allTaches[x].setMinutes(min);
+                    allTaches[x].setHeure(heure);
+                    tacheEnRetard(x);
                 } else {
                     heure--;
                     allTaches[x].setHeure(heure);
@@ -145,10 +152,40 @@ function chrono(x) {
     }, 1000);
 }
 
-function tacheEnRetard(id) {
-    //changer coleurs
-    //call to bilan
-    Bilan.Retard();
+function tacheEnRetard(x) {
+
+    Bilan.incEnRetard();
+    //tache.tacheEnRetard();
+
+    $('#' + x + ' #btnChrono')[0].className = "btn btn-danger";
+    clearInterval(timer);
+
+    var timer = setInterval(function() {
+        var secondes = parseInt(allTaches[x].secondes);
+        var min = parseInt(allTaches[x].minutes);
+        var heure = parseInt(allTaches[x].heure);
+        if (secondes == 59) {
+            secondes = 00;
+            allTaches[x].setSecondes(secondes);
+            if (min == 59) {
+                min = 00;
+                allTaches[x].setMinutes(min);
+                if (heure == 0) {
+
+                } else {
+                    heure++;
+                    allTaches[x].setHeure(heure);
+                }
+            } else {
+                min++;
+                allTaches[x].setMinutes(min);
+            }
+        } else {
+            secondes++;
+            allTaches[x].setSecondes(secondes);
+        }
+        $('#' + x + ' #btnChrono')[0].innerText = heure + ' : ' + min + ' : ' + secondes;
+    }, 1000);
 
 
 }
@@ -169,21 +206,6 @@ function modifierTache(id) {
     var data = $("#mainTitleTache")[0].value;
     console.log(data);
     $("#titleTacheModal")[0].value = data;
-
-
-
-    var titleTache = $("#titleTacheModal")[0].value;
-    var prioriteTache = $("#selectPriorite")[0].value;
-    var heureTache = $("#heure")[0].value;
-    var minuteTache = $("#minutes")[0].value;
-    var secTache = $("#secondes")[0].value;
-    var tchx = new tache(titleTache, prioriteTache, heureTache, minuteTache, secTache);
-    creerUneTache(tchx);
-    allTaches.push(tchx);
-    $("#mainTitleTache")[0].value = '';
-    console.log('data: ', titleTache, prioriteTache, heureTache, minuteTache, secTache);
-    reinitialicer();
-    $('#modalCreer').modal('toggle');
 
 }
 
@@ -213,9 +235,9 @@ function creerUneTache(tacheAjout) {
         type: "button",
         disabled: ""
     })
-    if (tacheAjout.priorite == "haute") {
+    if (tacheAjout.priorite == "Haute") {
         $(prioriBtn).attr({ class: "btn btn-danger col-md-12" })
-    } else if (tacheAjout.priorite == "moyenne") {
+    } else if (tacheAjout.priorite == "Moyene") {
         $(prioriBtn).attr({ class: "btn btn-warning col-md-12" })
     } else {
         $(prioriBtn).attr({ class: "btn btn-info col-md-12" })
@@ -232,7 +254,7 @@ function creerUneTache(tacheAjout) {
     $(chronoBtn).attr({
         id: "btnChrono",
         type: "button",
-        class: "btn btn-light",
+        class: "btn btn-primary",
         disabled: ""
     })
     var chronostr = tacheAjout.heure + " : " + tacheAjout.minutes + " : " + tacheAjout.secondes;
@@ -319,9 +341,9 @@ function creerElementsTache() {
             type: "button",
             disabled: ""
         })
-        if (tacheAjout.priorite == "haute") {
+        if (tacheAjout.priorite == "Haute") {
             $(prioriBtn).attr({ class: "btn btn-danger col-md-12" })
-        } else if (tacheAjout.priorite == "moyenne") {
+        } else if (tacheAjout.priorite == "Moyene") {
             $(prioriBtn).attr({ class: "btn btn-warning col-md-12" })
         } else {
             $(prioriBtn).attr({ class: "btn btn-info col-md-12" })
@@ -395,6 +417,16 @@ function creerElementsTache() {
 
 function supprimer(id) {
     //si tache est en retard il faut décrimenter tache en retard
+    var t = new tache();
+    t = allTaches[id];
+    t.tacheEnRetard()
+
+    if (t.getStatus()) {
+
+    } else {
+
+    }
+
     Bilan.deincEnCours();
     Bilan.deincTotal();
     Bilan.upDateAffichage();
