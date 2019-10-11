@@ -1,3 +1,5 @@
+// Fanny Loignon && Javier Vallejos 
+
 class tache {
     nom = "";
     priorite = "";
@@ -20,6 +22,8 @@ class tache {
     minutes() { return this.minutes }
     secondes() { return this.secondes }
     tacheEnRetard() { this.retard = true }
+    setName(n) { this.nom = n }
+    setPriorite(p) { this.priorite = p }
     setHeure(h) { this.heure = h }
     setMinutes(m) { this.minutes = m }
     setSecondes(s) { this.secondes = s }
@@ -195,12 +199,12 @@ function modifierTache(id) {
     var tacheModifier = new tache()
     tacheModifier = allTaches.find(x => x.nom() == titleTache);
 
-
     $("#titleTacheModal")[0].value = tacheModifier.nom();
     $('#selectPriorite').prop('selectedIndex', 0);
     $("#heure")[0].value = tacheModifier.heure();
     $("#minutes")[0].value = tacheModifier.minutes();
     $("#secondes")[0].value = tacheModifier.secondes();
+
 
     /////ici modifier la tacheeee
     var data = $("#mainTitleTache")[0].value;
@@ -421,12 +425,6 @@ function supprimer(id) {
     t = allTaches[id];
     t.tacheEnRetard()
 
-    if (t.getStatus()) {
-
-    } else {
-
-    }
-
     Bilan.deincEnCours();
     Bilan.deincTotal();
     Bilan.upDateAffichage();
@@ -441,15 +439,20 @@ function check(id) {
     document.getElementsByClassName("boutonEdit" + id)[0].disabled = true;
     document.getElementsByClassName("boutonCheck" + id)[0].disabled = true;
     document.getElementsByClassName("boutonSup" + id)[0].disabled = true;
+    var tch = new tache();
+    tch = allTaches[id];
 
-    //si la tache est en retard 
-    //incrémenter terminé en retard du bilan
-    Bilan.deincEnCours();
-    Bilan.incAchevees();
+    if (tch.retard()) {
+        Bilan.incEnRetard()
+    } else {
+        Bilan.deincEnCours();
+        Bilan.incAchevees();
+    }
+
+
     Bilan.upDateAffichage();
 
 }
-
 
 function handleTitleTache() {
     var data = $("#mainTitleTache")[0].value;
@@ -477,19 +480,6 @@ function validateAjouterTache() {
             $('#btnAjouter').attr('disabled', 'disabled');
         }
     });
-}
-
-function validateTime() {
-    if (condition) {
-        return true
-    } else {
-        return false
-    }
-}
-
-function ValiderModal() {
-
-
 }
 
 function AjouterTache() {
