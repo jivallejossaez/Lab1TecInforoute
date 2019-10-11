@@ -21,17 +21,15 @@
                     <p class="titleApp">Gestionnaire de tâches</p>
                 </div>
                 <div class="col col-sm-2">
-                    <button type="button" class="btn btn-primary col-lg-12 fas fa-chart-line" data-toggle="modal"
-                        data-target="#ModalBilan">
+                    <button type="button" class="btn btn-primary col-lg-12 fas fa-chart-line" data-toggle="modal" data-target="#ModalBilan" onclick="upDateAffichage()">
                         bilan</button>
 
-                    <div class="modal fade" id="ModalBilan" tabindex="-1" role="dialog"
-                        aria-labelledby="ModalBilanLabel" aria-hidden="true">
+                    <div class="modal fade" id="ModalBilan" tabindex="-1" role="dialog" aria-labelledby="ModalBilanLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
 
                                 <div class="modal-body">
-                                    <!--////////// Ajout /////////-->
+
                                     <table class="table table-striped">
                                         <thead class="thead-dark">
                                             <tr>
@@ -85,7 +83,7 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <!--////////// Ajout /////////-->
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Retour</button>
                                 </div>
@@ -96,10 +94,10 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row deuxiemeLigne">
                 <div class="col col-sm-10">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Titre de la tâche" id="mainTitleTache">
+                        <input type="text" class="form-control" placeholder="Titre de la tâche" onchange="onInputChange()" id="mainTitleTache">
                         <div class="input-group">
 
                             <div id="modalCreer" class="modal fade" role="dialog">
@@ -108,13 +106,12 @@
                                     <div class="modal-content">
 
                                         <div class="modal-body">
-                                            <form name="formTache" id=" " onsubmit="getTacheData()" method="post">
+                                            <form name="formTache">
                                                 <div class="form-group row">
                                                     <label class="col-sm-4 col-form-label">Title
                                                         Tache</label>
                                                     <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="titleTacheModal"
-                                                            name='titleTache' placeholder="le text du buton Ajout">
+                                                        <input type="text" class="form-control" id="titleTacheModal" name='titleTache' placeholder="le text du buton Ajout">
                                                     </div>
                                                 </div>
 
@@ -122,38 +119,23 @@
                                                     <label class="col-sm-4 col-form-label">Priorite</label>
                                                     <div class="col-sm-8">
 
-
-
-                                                        <div class="dropdown">
-                                                            <button class="btn btn-secondary dropdown-toggle col-sm-8"
-                                                                type="button" id="idChoisir" data-toggle="dropdown"
-                                                                aria-haspopup="true" aria-expanded="false">
-                                                                Choisir
-                                                            </button>
-                                                            <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                                                                <button class="dropdown-item" id="haute"
-                                                                    type="button">Haute</button>
-                                                                <button class="dropdown-item" id="moyene"
-                                                                    type="button">Moyene</button>
-                                                                <button class="dropdown-item" id="basse"
-                                                                    type="button">Basse</button>
-                                                            </div>
-                                                        </div>
+                                                        <select class="custom-select" id="selectPriorite">
+                                                            <option selected>Choisir...</option>
+                                                            <option value="Haute">Haute</option>
+                                                            <option value="Moyene">Moyene</option>
+                                                            <option value="Basse">Basse</option>
+                                                          </select>
 
                                                     </div>
                                                 </div>
 
                                                 <div class="form-group row">
-                                                    <label for="echeance"
-                                                        class="col-sm-4 col-form-label">Echéance</label>
+                                                    <label for="echeance" class="col-sm-4 col-form-label">Echéance</label>
                                                     <div class="col-sm-8">
                                                         <div class="input-group">
-                                                            <input type="text" id="heure" placeholder="Heure"
-                                                                class="form-control">
-                                                            <input type="text" id="minutes" placeholder="Minutes"
-                                                                class="form-control">
-                                                            <input type="text" id="secondes" placeholder="Secondes"
-                                                                class="form-control">
+                                                            <input type="text" id="heure" placeholder="Heure" class="form-control">
+                                                            <input type="text" id="minutes" placeholder="Minutes" class="form-control">
+                                                            <input type="text" id="secondes" placeholder="Secondes" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -163,10 +145,8 @@
                                         </div>
 
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary"
-                                                onclick="reinitialicer()">Reinitialicer</button>
-                                            <input type="submit" class="btn btn-secondary" onclick="AjouterTache()"
-                                                value="Enregistrer">
+                                            <button type="button" class="btn btn-secondary" onclick="reinitialicer()">Reinitialicer</button>
+                                            <input type="submit" id="enregistrerBtn" class="btn btn-secondary" disabled="disabled" onclick="AjouterTache()" value="Enregistrer">
                                         </div>
                                     </div>
 
@@ -177,42 +157,19 @@
                     </div>
                 </div>
                 <div class="col col-sm-2">
-                    <button class="btn btn-outline-secondary col-md-12" type="button" id="btnAjouter"
-                        data-toggle="modal" data-target="#modalCreer" onclick="handleTitleTache()">Créer</button>
+                    <button class="btn btn-outline-secondary col-md-12" type="button" id="btnAjouter" data-toggle="modal" data-target="#modalCreer" onclick="handleTitleTache()">Créer</button>
                 </div>
 
 
 
-            </div>
-            <div class="row" id="templateTache">
-                <div class="col">
-                    <p id="nomTache">Nom Tâche</p>
-                </div>
-                <div class="col">
-                    <button id="btnPriorite" type="button" class="btn btn-light" disabled>Priorite</button>
-                </div>
-                <div class="col">
-                    <button type="button" class="btn btn-light" id="btnChrono" disabled>Chrono</button>
-                </div>
-                <div class="col">
-                    <button class="btn btn-default fas fa-trash-alt" type="button" id="btnSupprimer"></button>
-                    <button class="btn btn-default fas fa-check" type="button" id="btnCheck"></button>
-                    <button class="btn btn-default fas fa-pencil-alt" type="button" id="btnEdit"></button>
-                </div>
             </div>
 
         </div>
+
+
     </div>
 
 </body>
 
-<script>
-
-    $('.dropdown').click(function () {
-        $('.dropdown-menu').toggleClass('show');
-        
-    });
-
-</script>
 
 </html>

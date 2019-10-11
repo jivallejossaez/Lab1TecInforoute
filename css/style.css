@@ -1,3 +1,29 @@
+
+.tableau{
+    background-color : rgb(234, 234, 241);
+    margin-top: 5px;
+    padding-top : 10px;
+    border-radius: 2px;
+}
+.btnBilan{
+    flex: 1;
+    flex-direction: row-reverse;
+    padding: 10;
+}
+
+#templateTache{
+    padding: 1%; 
+    border: 1px solid;
+    margin: 1%;
+}
+#prioriteTache{
+    border: 1px solid;
+    text-align: center;
+}
+.deuxiemeLigne{
+    margin-top : 10px;
+}
+
 .auto-center{
     margin-top: auto;
     margin-bottom: auto;
@@ -15,25 +41,4 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-}
- .titleApp{
-    align-items: center;
-    justify-items: center;
-    color: #FFF;
-    text-align: left;
-    font-size: large;
- }
-.form {
-  width: 450px;
-
-}
-
-#templateTache{
-    padding: 1%; 
-    border: 1px solid;
-    margin: 1%;
-}
-#prioriteTache{
-    border: 1px solid;
-    text-align: center;
 }
